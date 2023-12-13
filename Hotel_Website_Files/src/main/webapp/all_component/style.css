@@ -1,0 +1,45 @@
+.bg-custom{
+	background-color:#303f9f;
+}
+.navbar .nav-item:hover .nav-link{
+	background-color: white;
+	color:#303f9f;
+	border-radius:15px
+}
+
+.footer {
+	position: fixed;
+    bottom: 0;
+    background-color: #222;
+    width: 100%;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+    margin-top: auto;
+}
+.footer a {
+    color: #ff6600;
+    text-decoration: none;
+}
+.footer a:hover {
+    text-decoration: underline;
+}
+
+body {
+    background: url("../image/hotel_background.jpg") no-repeat center center fixed;
+    background-size: cover;
+    min-height: 100vh;
+    background-color: #000000; /* Set the desired pale background color */
+    background-blend-mode: exclusion;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group-inline {
+    display: inline-block;
+    margin-right: 10px; /* Adjust as needed to control the spacing between the groups */
+}
+
+.form-group {
+    margin-right: 10px; /* Adjust as needed to control the spacing between the fields within a group */
+}
