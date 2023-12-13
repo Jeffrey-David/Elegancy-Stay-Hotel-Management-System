@@ -1,0 +1,116 @@
+CREATE DATABASE `hotel`;
+use hotel;
+
+
+CREATE TABLE `bookroom` (
+  `bookingID` int NOT NULL AUTO_INCREMENT,
+  `emailId` varchar(45) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `name` varchar(45) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `noOfRooms` int DEFAULT NULL,
+  `DOB` date DEFAULT NULL,
+  `mobNum` int DEFAULT NULL,
+  `mealPlan` varchar(45) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `checkIn` date DEFAULT NULL,
+  `checkOut` date DEFAULT NULL,
+  `beddingType` varchar(45) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `roomType` varchar(45) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `costNum` decimal(10,2) DEFAULT NULL,
+  `address` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `totalCost` decimal(10,2) DEFAULT NULL,
+  PRIMARY KEY (`bookingID`),
+  KEY `fk_bookroom_roomType` (`roomType`),
+  CONSTRAINT `fk_bookroom_roomType` FOREIGN KEY (`roomType`) REFERENCES `rooms` (`roomType`)
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+CREATE TABLE `payments` (
+  `payment_id` int(11) NOT NULL AUTO_INCREMENT,
+  `booking_id` int(11) DEFAULT NULL,
+  `amount` decimal(10,2) DEFAULT NULL,
+  `payment_date` date DEFAULT NULL,
+  `payment_method` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`payment_id`),
+  KEY `booking_id` (`booking_id`),
+  CONSTRAINT `payments_ibfk_1` FOREIGN KEY (`booking_id`) REFERENCES `bookroom` (`bookingID`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+CREATE TABLE `rooms` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `roomType` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `noOfRooms` int DEFAULT NULL,
+  `costNum` decimal(10,2) DEFAULT NULL,
+  `image` blob,
+  PRIMARY KEY (`id`),
+  KEY `idx_roomType` (`roomType`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+CREATE TABLE `users` (
+  `user_id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `mobile_number` varchar(15) DEFAULT NULL,
+  `password` varchar(255) NOT NULL,
+  PRIMARY KEY (`user_id`),
+  UNIQUE KEY `email` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+CREATE TABLE contact_queries (
+    query_id INT AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(255) NOT NULL,
+    header VARCHAR(255) NOT NULL,
+    message TEXT NOT NULL,
+    resolved BOOLEAN DEFAULT FALSE,
+    submission_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
+
+
+-- Insert two admin data records into the `users` table
+INSERT INTO `users` (`name`, `email`, `mobile_number`, `password`)
+VALUES
+  ('Admin 1', 'admin1@example.com', '1234567890', 'admin1password'),
+  ('Admin 2', 'admin2@example.com', '9876543210', 'admin2password');
+
+INSERT INTO `rooms` (`roomType`, `noOfRooms`, `costNum`, `image`)
+VALUES
+  ('Queen', 10, 150.00, NULL),
+  ('King', 11, 180.00, NULL),
+  ('Suite', 12, 250.00, NULL),
+  ('Executive Suite', 13, 300.00, NULL),
+  ('Deluxe', 14, 200.00, NULL);
+  
+-- Insert 20 example data records into the `bookroom` table
+INSERT INTO `bookroom` (`emailId`, `name`, `noOfRooms`, `DOB`, `mobNum`, `mealPlan`, `checkIn`, `checkOut`, `beddingType`, `roomType`, `costNum`, `address`, `totalCost`)
+VALUES
+  ('user1@example.com', 'John Doe', 2, '1990-01-15', 1234567890, 'Full Board', '2023-10-05', '2023-10-10', 'Double', 'King', 180.00, '123 Main St', 360.00),
+  ('user2@example.com', 'Jane Smith', 1, '1985-05-20', 9876543210, 'Breakfast', '2023-10-15', '2023-10-20', 'Single', 'Queen', 150.00, '456 Elm St', 150.00),
+  ('user3@example.com', 'Bob Johnson', 3, '1992-12-30', 5555555555, 'Room Only', '2023-11-05', '2023-11-10', 'Triple', 'Deluxe', 200.00, '789 Oak St', 600.00),
+  ('user4@example.com', 'Alice Brown', 2, '1980-07-10', 1111111111, 'Room Only', '2023-11-15', '2023-11-20', 'Double', 'Suite', 250.00, '101 Pine St', 500.00),
+  ('user5@example.com', 'David White', 1, '1998-03-25', 9999999999, 'Full Board', '2023-10-20', '2023-10-25', 'Single', 'Executive Suite', 300.00, '222 Cedar St', 300.00),
+  ('user6@example.com', 'Eva Green', 2, '1995-09-05', 7777777777, 'Half Board', '2023-11-01', '2023-11-06', 'Double', 'King', 180.00, '333 Birch St', 360.00),
+  ('user7@example.com', 'Sam Wilson', 3, '1983-04-18', 3333333333, 'Breakfast', '2023-10-10', '2023-10-15', 'Triple', 'Queen', 150.00, '444 Maple St', 450.00),
+  ('user8@example.com', 'Olivia Davis', 1, '1996-08-12', 4444444444, 'Full Board', '2023-11-10', '2023-11-15', 'Single', 'Queen', 150.00, '555 Pine St', 150.00),
+  ('user9@example.com', 'James Lee', 2, '1994-02-28', 6666666666, 'Half Board', '2023-10-25', '2023-10-30', 'Double', 'Deluxe', 200.00, '666 Oak St', 400.00),
+  ('user10@example.com', 'Linda Hall', 1, '1976-06-08', 2222222222, 'Room Only', '2023-11-20', '2023-11-25', 'Single', 'King', 180.00, '777 Cedar St', 180.00),
+  ('user11@example.com', 'Mark Johnson', 2, '1988-03-12', 5555555555, 'Full Board', '2023-10-15', '2023-10-20', 'Double', 'King', 180.00, '123 Elm St', 360.00),
+  ('user12@example.com', 'Emily Brown', 1, '1990-07-05', 9999999999, 'Room Only', '2023-11-10', '2023-11-15', 'Single', 'Queen', 150.00, '456 Oak St', 150.00),
+  ('user13@example.com', 'Sarah White', 3, '1985-11-22', 1234567890, 'Breakfast', '2023-11-01', '2023-11-06', 'Triple', 'Suite', 250.00, '789 Main St', 750.00),
+  ('user14@example.com', 'Michael Smith', 2, '1995-04-30', 3333333333, 'Half Board', '2023-10-20', '2023-10-25', 'Double', 'Queen', 150.00, '101 Birch St', 300.00),
+  ('user15@example.com', 'Oliver Davis', 1, '1977-09-15', 7777777777, 'Room Only', '2023-11-05', '2023-11-10', 'Single', 'King', 180.00, '222 Pine St', 180.00),
+  ('user16@example.com', 'Sophia Wilson', 2, '1983-01-18', 1234567890, 'Full Board', '2023-10-10', '2023-10-15', 'Double', 'Executive Suite', 300.00, '333 Cedar St', 600.00),
+  ('user17@example.com', 'Ethan Green', 3, '1992-05-30', 9876543210, 'Half Board', '2023-11-15', '2023-11-20', 'Triple', 'Deluxe', 200.00, '444 Elm St', 600.00),
+  ('user18@example.com', 'Ava Hall', 2, '1980-08-20', 1111111111, 'Full Board', '2023-10-25', '2023-10-30', 'Double', 'Suite', 250.00, '555 Main St', 500.00),
+  ('user19@example.com', 'Liam Lee', 1, '1998-06-25', 9999999999, 'Room Only', '2023-11-20', '2023-11-25', 'Single', 'Queen', 150.00, '666 Cedar St', 150.00),
+  ('user20@example.com', 'Mia Johnson', 2, '1993-02-28', 7777777777, 'Breakfast', '2023-10-05', '2023-10-10', 'Double', 'King', 180.00, '777 Oak St', 360.00);
+
+-- Insert the first sample record
+INSERT INTO contact_queries (email, header, message, resolved)
+VALUES ('user1@example.com', 'Sample Query 1', 'This is the first sample query message.', FALSE);
+
+-- Insert the second sample record
+INSERT INTO contact_queries (email, header, message, resolved)
+VALUES ('user2@example.com', 'Sample Query 2', 'This is the second sample query message.', TRUE);
+
