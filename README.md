@@ -99,3 +99,14 @@ __________________________________________________
 ●	Deploy the project and access it in a web browser for testing.
 __________________________________________________
 
+### Screenshots
+
+![image](https://github.com/Jeffrey-David/Elegancy-Stay-Hotel-Management-System/assets/66271004/d788edb8-f2a0-40f2-8827-c6cfd57c56f5)
+
+![image](https://github.com/Jeffrey-David/Elegancy-Stay-Hotel-Management-System/assets/66271004/d04de799-7ca2-4c15-ad06-bf9aaad8a934)
+
+![image](https://github.com/Jeffrey-David/Elegancy-Stay-Hotel-Management-System/assets/66271004/217f2a07-646e-4404-880e-94b82b8a2e67)
+
+
+![image](https://github.com/Jeffrey-David/Elegancy-Stay-Hotel-Management-System/assets/66271004/256efb08-816a-4e86-a4ad-36f6df69e19b)
+
